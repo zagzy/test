@@ -24,7 +24,9 @@ function planet(place, size){
     }
 }
 
-
+var planets = [];
+var canvas;
+var ctx;
 
 function tick(){
 //wykonuje sie co klatkę
@@ -32,14 +34,32 @@ function tick(){
 
 function draw(){
 //zaktualizuj canvas
+for (var i = planets.length - 1; i >= 0; i--) {
+    planets[i]
+    centerX = planets[i].place.y;
+    centerY = planets[i].place.x;
+    radius = planets[i].size;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'green';
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#003300';
+    ctx.stroke();
+};
 }
 
 $(function() {
 //po załadowaniu
+canvas = document.getElementById("board");
+ctx = canvas.getContext("2d");
 
-v = new vector(5, 10);
-vv = new vector(12,13);
-console.log(v.dist(vv));
+planets.push(new planet(new vector(5, 5), 10));
+planets.push(new planet(new vector(50, 500), 20));
+planets.push(new planet(new vector(300, 5), 10));
+planets.push(new planet(new vector(5, 455), 10));
+planets.push(new planet(new vector(70, 70), 10));
 
 
+draw();
 });
